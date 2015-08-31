@@ -1,0 +1,62 @@
+<head>
+	<link href="css/_bower.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="js/_bower.js"></script>
+	<script type="text/javascript" src="js/Alert.js"></script>
+	<script type="text/javascript" src="js/TreeNodeView.js"></script>
+	<script type="text/javascript" src="js/TreeNode.js"></script>
+	<script type="text/javascript" src="js/TreeView.js"></script>
+	<script type="text/javascript" src="js/VM.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+	<div data-bind='foreach: alerts'>
+		<div data-bind="template: { name: 'alerts-template', data: $data }">
+
+		</div>
+	</div>
+	
+	<div class="settings">
+		<div>
+			<div class="radio">
+				<label><input type='radio' value='0' name='renderType' data-bind='checked: settings.renderType' checked="checked">User Recurcive Render</label>
+			</div>
+			<div class="radio">
+				<label><input type='radio' value='1' name='renderType' data-bind='checked: settings.renderType'>User Iterative Render</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<button type="button" class="btn btn-sm btn-default" data-bind='click: settings.buttons.AddRootNode'>Add New Root Node</button>
+			<button type="button" class="btn btn-sm btn-default"  data-bind='click: settings.buttons.AddChildNode,visible: settings.selectedNode() instanceof TreeNode'>Add Child to Selected Node</button>
+			<button type="button" class="btn btn-sm btn-default"  data-bind='click: settings.buttons.RemoveNode,visible: settings.selectedNode() instanceof TreeNode'>Delete Selected Node</button>
+		</div>
+		<div>
+			<label for="newNode">Node Name</label>
+			<input id="newNode" class="form-control" placeholder="Enter Node Name" type='text' value='' data-bind='textInput: settings.inputs.newNode'>
+		</div>
+		<!-- ko 'if': vm.settings.selectedNode() instanceof TreeNode -->
+		<div class="form-group">
+			<label for="changeName">Change Name</label>
+			<input class="form-control" id="changeName" type="text" data-bind='textInput: vm.settings.selectedNode().data.name'>
+		</div>
+		<!-- /ko -->
+		
+	</div>
+	<div id="tree1" class="treeview">
+		<ul class="list-group" data-bind='foreach: treeList'>
+			<span class="icon glyphicon" data-bind='css: {"expand-icon": children().length > 0, "glyphicon-minus": children().length > 0 && showChildren(), "glyphicon-plus": children().length > 0 && !showChildren()}, click: toggleChildren, style: { left: 40 * depth + 10}, visible: isShow'></span>
+			<li class="list-group-item node-tree" data-bind='css:{"selected": isSelected}, visible: isShow, click: toggleSelection'>
+				<span data-bind="style: { marginLeft: 20 * depth, marginRight: 20 * depth}"> </span>
+				<span class="icon node-icon"></span>
+				<span class="treeText" data-bind='text: data.name'></span>
+			</li>
+		</ul>
+	</div>
+	<script type="text/html" id="alerts-template">
+		<div data-bind="attr: { 'class': 'alert ' + $data.class }" role="alert">
+			<strong data-bind="text: header"></strong>
+			<span data-bind="text: text"></span>
+		</div>
+	</script>
+</body>

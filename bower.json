@@ -1,0 +1,25 @@
+{
+  "name": "test-tree-knockout",
+  "version": "0.0.1",
+  "authors": [
+    "alex.ripinsky <alex.ripinsky@gmail.com>"
+  ],
+  "main": "server.coffe",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "bootstrap-treeview": "~1.2.0",
+    "jquery": "~2.1.4",
+    "knockout": "knockoutjs#~3.3.0"
+  },
+  "devDependencies": {
+    "qunit": "~1.18.0"
+  }
+}
